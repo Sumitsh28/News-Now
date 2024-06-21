@@ -81,7 +81,7 @@ const Modal = ({ showModal, setShowModal, article }) => {
             </button>
             <div className="flex flex-col items-center mt-5">
               <img
-                src={article?.urlToImage || fallBackImg}
+                src={article?.image || fallBackImg}
                 alt="News Image"
                 className="rounded-lg w-full h-64 object-cover"
               />

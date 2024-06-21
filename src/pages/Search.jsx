@@ -16,19 +16,15 @@ const Search = () => {
       setLoading(true);
       try {
         let url = "";
-        if (search === "") {
-          url = `https://newsapi.org/v2/everything?sortBy=publishedAt&page=${page}&pageSize=${pageSize}&language=en&apiKey=${
-            import.meta.env.VITE_NEWS_API
-          }`;
+        const GNEWS_API_KEY = import.meta.env.VITE_GNEWS_API;
+        if (!search) {
+          url = `https://gnews.io/api/v4/search?q=latest&lang=en&country=in&sortBy=publishedAt&page=${page}&max=${pageSize}&token=${GNEWS_API_KEY}`;
         } else {
-          url = `https://newsapi.org/v2/everything?sortBy=publishedAt&page=${page}&pageSize=${pageSize}&language=en&q=${search}&apiKey=${
-            import.meta.env.VITE_NEWS_API
-          }`;
+          url = `https://gnews.io/api/v4/search?q=${search}&lang=en&country=in&sortBy=publishedAt&page=${page}&max=${pageSize}&token=${GNEWS_API_KEY}`;
         }
         const res = await fetch(url);
         const data = await res.json();
 
-        // console.log(data);
         setNews(data?.articles);
         setLoading(false);
       } catch (error) {
@@ -42,24 +38,21 @@ const Search = () => {
 
   const handleBack = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setPage(page - 1);
     if (page > 1) {
+      setLoading(true);
+      setPage(page - 1);
       try {
         const search = urlParams.get("query");
         let url = "";
-        if (search === "") {
-          url = `https://newsapi.org/v2/everything?sortBy=publishedAt&page=${
+        const GNEWS_API_KEY = import.meta.env.VITE_GNEWS_API;
+        if (!search) {
+          url = `https://gnews.io/api/v4/search?q=latest&lang=en&country=in&sortBy=publishedAt&page=${
             page - 1
-          }&pageSize=${pageSize}&language=en&apiKey=${
-            import.meta.env.VITE_NEWS_API
-          }`;
+          }&max=${pageSize}&token=${GNEWS_API_KEY}`;
         } else {
-          url = `https://newsapi.org/v2/everything?sortBy=publishedAt&page=${
+          url = `https://gnews.io/api/v4/search?q=${search}&lang=en&country=in&sortBy=publishedAt&page=${
             page - 1
-          }&pageSize=${pageSize}&language=en&q=${search}&apiKey=${
-            import.meta.env.VITE_NEWS_API
-          }`;
+          }&max=${pageSize}&token=${GNEWS_API_KEY}`;
         }
         const res = await fetch(url);
         const data = await res.json();
@@ -71,6 +64,7 @@ const Search = () => {
       }
     }
   };
+
   const handleNext = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -78,18 +72,15 @@ const Search = () => {
     try {
       const search = urlParams.get("query");
       let url = "";
-      if (search === "") {
-        url = `https://newsapi.org/v2/everything?sortBy=publishedAt&page=${
+      const GNEWS_API_KEY = import.meta.env.VITE_GNEWS_API;
+      if (!search) {
+        url = `https://gnews.io/api/v4/search?q=latest&lang=en&country=in&sortBy=publishedAt&page=${
           page + 1
-        }&pageSize=${pageSize}&language=en&apiKey=${
-          import.meta.env.VITE_NEWS_API
-        }`;
+        }&max=${pageSize}&token=${GNEWS_API_KEY}`;
       } else {
-        url = `https://newsapi.org/v2/everything?sortBy=publishedAt&page=${
+        url = `https://gnews.io/api/v4/search?q=${search}&lang=en&country=in&sortBy=publishedAt&page=${
           page + 1
-        }&pageSize=${pageSize}&language=en&q=${search}&apiKey=${
-          import.meta.env.VITE_NEWS_API
-        }`;
+        }&max=${pageSize}&token=${GNEWS_API_KEY}`;
       }
       const res = await fetch(url);
       const data = await res.json();

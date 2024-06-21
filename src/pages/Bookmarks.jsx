@@ -38,7 +38,7 @@ const Bookmarks = () => {
               >
                 <div className="flex justify-center max-h-[40%]">
                   <img
-                    src={article?.urlToImage || fallBackImg}
+                    src={article?.image || fallBackImg}
                     alt="News Image"
                     className="rounded-xl"
                   />

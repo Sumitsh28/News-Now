@@ -13,7 +13,7 @@ const NewsCard = ({ article, category }) => {
       <div className="p-3 rounded-xl shadow-2xl h-[400px] flex flex-col justify-between hover:scale-105 transition-all duration-150 bg-[#242424] text-gray-100">
         <div className="flex justify-center max-h-[40%]">
           <img
-            src={article?.urlToImage || fallBackImg}
+            src={article?.image || fallBackImg}
             alt="News Image"
             className="rounded-xl"
           />
